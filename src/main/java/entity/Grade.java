@@ -16,6 +16,14 @@ public class Grade {
         this.grade = grade;
     }
 
+    /**
+     * Returns a new GradeBuilder instance.
+     * @return a new GradeBuilder instance.
+     */
+    public static GradeBuilder builder() {
+        return new GradeBuilder();
+    }
+
     @Override
     public String toString() {
         return "Grade{" + "username='" + username + '\''
@@ -45,14 +53,6 @@ public class Grade {
      */
     public int getGrade() {
         return grade;
-    }
-
-    /**
-     * Returns a new GradeBuilder instance.
-     * @return a new GradeBuilder instance.
-     */
-    public static GradeBuilder builder() {
-        return new GradeBuilder();
     }
 
     /**

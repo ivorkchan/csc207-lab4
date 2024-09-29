@@ -3,9 +3,7 @@ package usecase;
 import api.GradeDataBase;
 import entity.Grade;
 
-/**
- * The class for the get grade usecase.
- */
+/** The class for the get grade usecase. */
 public final class GetGradeUseCase {
     private final GradeDataBase gradeDatabase;
 
@@ -15,6 +13,7 @@ public final class GetGradeUseCase {
 
     /**
      * Run the get grade action.
+     *
      * @param username The username.
      * @param course The course (i.e., CSC207).
      * @return a grade object if successful.

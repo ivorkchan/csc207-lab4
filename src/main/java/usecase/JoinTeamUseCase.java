@@ -3,9 +3,7 @@ package usecase;
 import api.GradeDataBase;
 import entity.Team;
 
-/**
- * JoinTeamUseCase class.
- */
+/** JoinTeamUseCase class. */
 public final class JoinTeamUseCase {
     private final GradeDataBase gradeDataBase;
 
@@ -15,6 +13,7 @@ public final class JoinTeamUseCase {
 
     /**
      * Join a team.
+     *
      * @param name The name of the team.
      * @return The team that the student joined.
      */

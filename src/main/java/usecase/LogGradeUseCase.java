@@ -4,9 +4,7 @@ import org.json.JSONException;
 
 import api.GradeDataBase;
 
-/**
- * LogGradeUseCase class.
- */
+/** LogGradeUseCase class. */
 public final class LogGradeUseCase {
     private final GradeDataBase gradeDataBase;
 
@@ -16,6 +14,7 @@ public final class LogGradeUseCase {
 
     /**
      * Log a grade.
+     *
      * @param course The course.
      * @param grade The grade.
      * @throws JSONException if an error occurs.

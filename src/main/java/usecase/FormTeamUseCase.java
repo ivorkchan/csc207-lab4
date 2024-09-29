@@ -3,9 +3,7 @@ package usecase;
 import api.GradeDataBase;
 import entity.Team;
 
-/**
- * FormTeamUseCase class.
- */
+/** FormTeamUseCase class. */
 public final class FormTeamUseCase {
     private final GradeDataBase gradeDataBase;
 
@@ -15,6 +13,7 @@ public final class FormTeamUseCase {
 
     /**
      * Form a team.
+     *
      * @param name The name of the team.
      * @return The team that was formed. Note that if there is error, the team will not be formed.
      */

@@ -8,15 +8,14 @@ import entity.Team;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
 /**
- * Testing get average grade across your team.
- * The idea is that we don't want to wait for the specific API call to be implemented.
- * <p>
- * This is like the other test, but doesn't use Mockito to more simply
- * demonstrate the idea of mocking (or stubbing) our GradeDataBase.
- * <p>
- * This should pass if the "to do" Task 3a is correctly implemented.
+ * Testing get average grade across your team. The idea is that we don't want to wait for the
+ * specific API call to be implemented.
+ *
+ * <p>This is like the other test, but doesn't use Mockito to more simply demonstrate the idea of
+ * mocking (or stubbing) our GradeDataBase.
+ *
+ * <p>This should pass if the "to do" Task 3a is correctly implemented.
  */
 public class GetAverageGradeUseCaseTest {
 
@@ -25,7 +24,7 @@ public class GetAverageGradeUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        gradeDB = new GradeDataBaseStub();  // Using a stub instead of a mock
+        gradeDB = new GradeDataBaseStub(); // Using a stub instead of a mock
         getAverageGradeUseCase = new GetAverageGradeUseCase(gradeDB);
     }
 
@@ -54,35 +53,15 @@ public class GetAverageGradeUseCaseTest {
         @Override
         public Grade[] getGrades(String username) {
             if (username.equals("t1chenpa")) {
-                return new Grade[]{
-                        Grade.builder()
-                                .username("t1chenpa")
-                                .course("CSC207")
-                                .grade(85)
-                                .build(),
-                        Grade.builder()
-                                .username("t1chenpa")
-                                .course("CSC148")
-                                .grade(86)
-                                .build(),
-                        Grade.builder()
-                                .username("t1chenpa")
-                                .course("CSC165")
-                                .grade(91)
-                                .build()
+                return new Grade[] {
+                    Grade.builder().username("t1chenpa").course("CSC207").grade(85).build(),
+                    Grade.builder().username("t1chenpa").course("CSC148").grade(86).build(),
+                    Grade.builder().username("t1chenpa").course("CSC165").grade(91).build()
                 };
             } else if (username.equals("t2chenpa")) {
-                return new Grade[]{
-                        Grade.builder()
-                                .username("t2chenpa")
-                                .course("CSC207")
-                                .grade(81)
-                                .build(),
-                        Grade.builder()
-                                .username("t2chenpa")
-                                .course("CSC148")
-                                .grade(89)
-                                .build()
+                return new Grade[] {
+                    Grade.builder().username("t2chenpa").course("CSC207").grade(81).build(),
+                    Grade.builder().username("t2chenpa").course("CSC148").grade(89).build()
                 };
             }
             return new Grade[0];
@@ -102,13 +81,11 @@ public class GetAverageGradeUseCaseTest {
         public Team getMyTeam() {
             return Team.builder()
                     .name("team1")
-                    .members(new String[]{"t1chenpa", "t2chenpa"})
+                    .members(new String[] {"t1chenpa", "t2chenpa"})
                     .build();
         }
 
         @Override
-        public void leaveTeam() throws JSONException {
-
-        }
+        public void leaveTeam() throws JSONException {}
     }
 }

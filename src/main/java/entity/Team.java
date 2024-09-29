@@ -15,6 +15,14 @@ public class Team {
         this.members = members;
     }
 
+    /**
+     * Returns a new TeamBuilder instance.
+     * @return a new TeamBuilder instance.
+     */
+    public static TeamBuilder builder() {
+        return new TeamBuilder();
+    }
+
     @Override
     public String toString() {
         return "Team{" + "name='" + name + '\''
@@ -35,14 +43,6 @@ public class Team {
      */
     public String[] getMembers() {
         return members;
-    }
-
-    /**
-     * Returns a new TeamBuilder instance.
-     * @return a new TeamBuilder instance.
-     */
-    public static TeamBuilder builder() {
-        return new TeamBuilder();
     }
 
     /**

@@ -4,9 +4,7 @@ import api.GradeDataBase;
 import entity.Grade;
 import entity.Team;
 
-/**
- * GetTopGradeUseCase class.
- */
+/** GetTopGradeUseCase class. */
 public final class GetTopGradeUseCase {
     private final GradeDataBase gradeDataBase;
 
@@ -16,6 +14,7 @@ public final class GetTopGradeUseCase {
 
     /**
      * Get the highest grade for a course across your team.
+     *
      * @param course The course.
      * @return The top grade.
      */
