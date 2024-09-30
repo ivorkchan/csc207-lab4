@@ -29,6 +29,8 @@ public class MongoGradeDataBase implements GradeDataBase {
     private static final String TOKEN = "token";
     // load getPassword() from env variable.
     private static final int SUCCESS_CODE = 200;
+    public static final String COURSE = "course";
+    public static final String TEAM = "%s/team";
 
     public static String getAPIToken() {
         return System.getenv(TOKEN);
@@ -57,7 +59,7 @@ public class MongoGradeDataBase implements GradeDataBase {
                 final JSONObject grade = responseBody.getJSONObject(GRADE);
                 return Grade.builder()
                         .username(grade.getString("username"))
-                        .course(grade.getString("course"))
+                        .course(grade.getString(COURSE))
                         .grade(grade.getInt(GRADE))
                         .build();
             }
@@ -95,7 +97,7 @@ public class MongoGradeDataBase implements GradeDataBase {
                     final JSONObject grade = grades.getJSONObject(i);
                     result[i] = Grade.builder()
                             .username(grade.getString("username"))
-                            .course(grade.getString("course"))
+                            .course(grade.getString(COURSE))
                             .grade(grade.getInt(GRADE))
                             .build();
                 }
@@ -116,7 +118,7 @@ public class MongoGradeDataBase implements GradeDataBase {
                 .build();
         final MediaType mediaType = MediaType.parse(APPLICATION_JSON);
         final JSONObject requestBody = new JSONObject();
-        requestBody.put("course", course);
+        requestBody.put(COURSE, course);
         requestBody.put(GRADE, grade);
         final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
         final Request request = new Request.Builder()
@@ -151,7 +153,7 @@ public class MongoGradeDataBase implements GradeDataBase {
         requestBody.put(NAME, name);
         final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
         final Request request = new Request.Builder()
-                .url(String.format("%s/team", API_URL))
+                .url(String.format(TEAM, API_URL))
                 .method("POST", body)
                 .addHeader(TOKEN, getAPIToken())
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
@@ -192,7 +194,7 @@ public class MongoGradeDataBase implements GradeDataBase {
         requestBody.put(NAME, name);
         final RequestBody body = RequestBody.create(mediaType, requestBody.toString());
         final Request request = new Request.Builder()
-                .url(String.format("%s/team", API_URL))
+                .url(String.format(TEAM, API_URL))
                 .method("PUT", body)
                 .addHeader(TOKEN, getAPIToken())
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
@@ -250,18 +252,36 @@ public class MongoGradeDataBase implements GradeDataBase {
         final OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         final Request request = new Request.Builder()
-                .url(String.format("%s/team", API_URL))
+                .url(String.format(TEAM, API_URL))
                 .method("GET", null)
                 .addHeader(TOKEN, getAPIToken())
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                 .build();
 
-        final Response response;
-        final JSONObject responseBody;
-
         // TODO Task 3b: Implement the logic to get the team information
         // HINT: Look at the formTeam method to get an idea on how to parse the response
+        try {
+            final Response response = client.newCall(request).execute();
+            final JSONObject responseBody = new JSONObject(response.body().string());
 
-        return null;
+            if (responseBody.getInt(STATUS_CODE) == SUCCESS_CODE) {
+                final JSONObject team = responseBody.getJSONObject("team");
+                return Team.builder()
+                        .name(team.getString(NAME))
+                        .members(team.getJSONArray("members")
+                                .toList()
+                                .stream()
+                                .map(Object::toString)
+                                .toArray(String[]::new)
+                        )
+                        .build();
+            }
+            else {
+                throw new RuntimeException(responseBody.getString(MESSAGE));
+            }
+        }
+        catch (IOException | JSONException event) {
+            throw new RuntimeException(event);
+        }
     }
 }
