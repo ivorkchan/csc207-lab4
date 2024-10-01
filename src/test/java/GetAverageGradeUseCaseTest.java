@@ -42,7 +42,26 @@ public class GetAverageGradeUseCaseTest {
 
         @Override
         public Grade getGrade(String username, String course) {
-            return null;
+            Grade grade = null;
+            if (username.equals("t1chenpa")) {
+                if (course.equals("CSC207")) {
+                    grade = Grade.builder()
+                                .username("t1chenpa")
+                                .course("CSC207")
+                                .grade(85)
+                                .build();
+
+                }
+            } else if (username.equals("t2chenpa")) {
+                if (course.equals("CSC207")) {
+                    grade = Grade.builder()
+                                .username("t2chenpa")
+                                .course("CSC207")
+                                .grade(81)
+                                .build();
+                }
+            }
+            return grade;
         }
 
         @Override
